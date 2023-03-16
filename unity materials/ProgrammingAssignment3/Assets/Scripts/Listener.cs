@@ -14,6 +14,7 @@ public class Listener : MonoBehaviour
 	{
         // add your code here
         EventManager.AddNoArgumentListener(HandleMessageEvent);
+        EventManager.AddIntArgumentListener(HandleCountMessageEvent);
 	}
 	
     /// <summary>
