@@ -3,7 +3,7 @@ Marked Programming Assignment 3 of the "Intermediate Object-Oriented Programming
 
 ## Description
 For this assignment, you need to implement all the classes as shown in the class diagram below:
-+ ![Managing Events Class Diagram](./managing_events_class_diagram.png)
+![Managing Events Class Diagram](./managing_events_class_diagram.png)
 
 The Unity materials I provided to you contains stubs for the **Invoker**, **Listener**, and **EventManager** classes, but you still have lots of work to do to finish implementing those classes (scripts). You also need to create and implement the **MessageEvent** and **CountMessageEvent** scripts.
 
