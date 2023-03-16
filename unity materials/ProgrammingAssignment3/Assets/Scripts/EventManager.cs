@@ -100,6 +100,12 @@ public static class EventManager
     public static void AddNoArgumentInvoker(Invoker invoker)
     {
         // add your code here
+        noArgumentInvoker = invoker;
+
+        if (noArgumentListener != null)
+        {
+            noArgumentInvoker.AddNoArgumentListener(noArgumentListener);
+        }
     }
 
     /// <summary>
@@ -109,6 +115,12 @@ public static class EventManager
     public static void AddNoArgumentListener(UnityAction listener)
     {
         // add your code here
+        noArgumentListener = listener;
+
+        if (noArgumentInvoker != null)
+        {
+            noArgumentInvoker.AddNoArgumentListener(noArgumentListener);
+        }
     }
 
     /// <summary>
