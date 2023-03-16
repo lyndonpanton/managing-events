@@ -12,7 +12,9 @@ public class Listener : MonoBehaviour
 	/// </summary>
 	public void Start()
 	{
-		// add your code here
+        // add your code here
+        EventManager.AddNoArgumentListener(HandleMessageEvent);
+        EventManager.AddIntArgumentListener(HandleCountMessageEvent);
 	}
 	
     /// <summary>

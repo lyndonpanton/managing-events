@@ -100,6 +100,12 @@ public static class EventManager
     public static void AddNoArgumentInvoker(Invoker invoker)
     {
         // add your code here
+        noArgumentInvoker = invoker;
+
+        if (noArgumentListener != null)
+        {
+            noArgumentInvoker.AddNoArgumentListener(noArgumentListener);
+        }
     }
 
     /// <summary>
@@ -109,6 +115,12 @@ public static class EventManager
     public static void AddNoArgumentListener(UnityAction listener)
     {
         // add your code here
+        noArgumentListener = listener;
+
+        if (noArgumentInvoker != null)
+        {
+            noArgumentInvoker.AddNoArgumentListener(noArgumentListener);
+        }
     }
 
     /// <summary>
@@ -118,6 +130,12 @@ public static class EventManager
     public static void AddIntArgumentInvoker(Invoker invoker)
     {
         // add your code here
+        intArgumentInvoker = invoker;
+
+        if (intArgumentListener != null)
+        {
+            intArgumentInvoker.AddOneArgumentListener(intArgumentListener);
+        }
     }
 
     /// <summary>
@@ -127,6 +145,12 @@ public static class EventManager
     public static void AddIntArgumentListener(UnityAction<int> listener)
     {
         // add your code here
+        intArgumentListener = listener;
+
+        if (intArgumentInvoker != null)
+        {
+            intArgumentInvoker.AddOneArgumentListener(intArgumentListener);
+        }
     }
 
     #endregion

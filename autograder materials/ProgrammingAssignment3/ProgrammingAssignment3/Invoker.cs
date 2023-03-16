@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// An event invoker
@@ -9,8 +10,13 @@ using UnityEngine.Events;
 public class Invoker : MonoBehaviour
 {
     // add your fields for your message event support here
+    Timer noArgumentTimer;
+    MessageEvent noArgumentMessageEvent;
 
     // add your fields for your count message event support here
+    Timer oneArgumentTimer;
+    CountMessageEvent oneArgumentMessageEvent;
+    int count = 0;
 
     /// <summary>
     /// Awake is called before Start
@@ -18,6 +24,8 @@ public class Invoker : MonoBehaviour
     public void Awake()
     {
         // add your code here
+        noArgumentMessageEvent = new MessageEvent();
+        oneArgumentMessageEvent = new CountMessageEvent();
     }
 
     /// <summary>
@@ -26,6 +34,15 @@ public class Invoker : MonoBehaviour
     public void Start()
 	{
         // add your code here
+        EventManager.AddNoArgumentInvoker(this);
+        noArgumentTimer = gameObject.AddComponent<Timer>();
+        noArgumentTimer.Duration = 1;
+        noArgumentTimer.Run();
+
+        EventManager.AddIntArgumentInvoker(this);
+        oneArgumentTimer = gameObject.AddComponent<Timer>();
+        oneArgumentTimer.Duration = 1;
+        oneArgumentTimer.Run();
 	}
 	
 	/// <summary>
@@ -34,6 +51,19 @@ public class Invoker : MonoBehaviour
 	void Update()
 	{
         // add your code here
+        if (noArgumentTimer.Finished)
+        {
+            InvokeNoArgumentEvent();
+            noArgumentTimer.Duration = 1;
+            noArgumentTimer.Run();
+        }
+
+        if (oneArgumentTimer.Finished)
+        {
+            InvokeOneArgumentEvent(count++);
+            oneArgumentTimer.Duration = 1;
+            oneArgumentTimer.Run();
+        }
 	}
 
     /// <summary>
@@ -44,6 +74,7 @@ public class Invoker : MonoBehaviour
     {
         // add your code here to add the given listener for
         // the message event
+        noArgumentMessageEvent.AddListener(listener);
     }
 
     /// <summary>
@@ -54,6 +85,7 @@ public class Invoker : MonoBehaviour
     {
         // add your code here to add the given listener for
         // the count message event
+        oneArgumentMessageEvent.AddListener(listener);
     }
 
     /// <summary>
@@ -64,6 +96,7 @@ public class Invoker : MonoBehaviour
     {
         // add your code here to remove the given listener from the
         // message event
+        noArgumentMessageEvent.RemoveListener(listener);
     }
 
     /// <summary>
@@ -74,6 +107,7 @@ public class Invoker : MonoBehaviour
     {
         // add your code here to remove the given listener from the
         // count message event
+        oneArgumentMessageEvent.RemoveListener(listener);
     }
 
     /// <summary>
@@ -84,6 +118,7 @@ public class Invoker : MonoBehaviour
     public void InvokeNoArgumentEvent()
     {
         // add your code here to invoke the message event
+        noArgumentMessageEvent.Invoke();
     }
 
     /// <summary>
@@ -96,5 +131,6 @@ public class Invoker : MonoBehaviour
     {
         // add your code here to invoke the count message event
         // with the given argument
+        oneArgumentMessageEvent.Invoke(argument);
     }
 }
