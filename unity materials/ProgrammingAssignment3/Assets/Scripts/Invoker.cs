@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// An event invoker
@@ -9,6 +10,8 @@ using UnityEngine.Events;
 public class Invoker : MonoBehaviour
 {
     // add your fields for your message event support here
+    Timer noArgumentTimer;
+    MessageEvent noArgumentMessageEvent;
 
     // add your fields for your count message event support here
 
@@ -18,6 +21,7 @@ public class Invoker : MonoBehaviour
     public void Awake()
     {
         // add your code here
+        noArgumentMessageEvent = new MessageEvent();
     }
 
     /// <summary>
@@ -26,6 +30,10 @@ public class Invoker : MonoBehaviour
     public void Start()
 	{
         // add your code here
+        EventManager.AddNoArgumentInvoker(this);
+        noArgumentTimer = gameObject.AddComponent<Timer>();
+        noArgumentTimer.Duration = 1;
+        noArgumentTimer.Run();
 	}
 	
 	/// <summary>
@@ -34,6 +42,12 @@ public class Invoker : MonoBehaviour
 	void Update()
 	{
         // add your code here
+        if (noArgumentTimer.Finished)
+        {
+            InvokeNoArgumentEvent();
+            noArgumentTimer.Duration = 1;
+            noArgumentTimer.Run();
+        }
 	}
 
     /// <summary>
@@ -44,6 +58,7 @@ public class Invoker : MonoBehaviour
     {
         // add your code here to add the given listener for
         // the message event
+        noArgumentMessageEvent.AddListener(listener);
     }
 
     /// <summary>
@@ -84,6 +99,7 @@ public class Invoker : MonoBehaviour
     public void InvokeNoArgumentEvent()
     {
         // add your code here to invoke the message event
+        noArgumentMessageEvent.Invoke();
     }
 
     /// <summary>
