@@ -7,16 +7,16 @@ using UnityEngine;
 /// </summary>
 public class Listener : MonoBehaviour
 {
-    /// <summary>
-    /// Use this for initialization
-    /// </summary>
-    public void Start()
-    {
+	/// <summary>
+	/// Use this for initialization
+	/// </summary>
+	public void Start()
+	{
         // add your code here
         EventManager.AddNoArgumentListener(HandleMessageEvent);
         EventManager.AddIntArgumentListener(HandleCountMessageEvent);
-    }
-
+	}
+	
     /// <summary>
     /// Handles the no argument event
     /// </summary>

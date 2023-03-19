@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// An event invoker
@@ -9,11 +10,11 @@ using UnityEngine.Events;
 public class Invoker : MonoBehaviour
 {
     // add your fields for your message event support here
-    //Timer messageTimer;
+    Timer messageTimer;
     MessageEvent noArgumentMessageEvent;
 
     // add your fields for your count message event support here
-    //Timer countMessageTimer;
+    Timer countMessageTimer;
     CountMessageEvent oneArgumentMessageEvent;
     int count = 0;
 
@@ -31,39 +32,39 @@ public class Invoker : MonoBehaviour
     /// Use this for initialization
     /// </summary>
     public void Start()
-    {
+	{
         // add your code here
         EventManager.AddNoArgumentInvoker(this);
-        //messageTimer = gameObject.AddComponent<Timer>();
-        //messageTimer.Duration = 1;
-        //messageTimer.Run();
+        messageTimer = gameObject.AddComponent<Timer>();
+        messageTimer.Duration = 1;
+        messageTimer.Run();
 
         EventManager.AddIntArgumentInvoker(this);
-        //countMessageTimer = gameObject.AddComponent<Timer>();
-        //countMessageTimer.Duration = 1;
-        //countMessageTimer.Run();
-    }
-
-    /// <summary>
-    /// Update is called once per frame
-    /// </summary>
-    void Update()
-    {
+        countMessageTimer = gameObject.AddComponent<Timer>();
+        countMessageTimer.Duration = 1;
+        countMessageTimer.Run();
+	}
+	
+	/// <summary>
+	/// Update is called once per frame
+	/// </summary>
+	void Update()
+	{
         // add your code here
-        //if (messageTimer.Finished)
-        //{
-        //    InvokeNoArgumentEvent();
-        //    messageTimer.Duration = 1;
-        //    messageTimer.Run();
-        //}
+        if (messageTimer.Finished)
+        {
+            InvokeNoArgumentEvent();
+            messageTimer.Duration = 1;
+            messageTimer.Run();
+        }
 
-        //if (countMessageTimer.Finished)
-        //{
-        //    InvokeOneArgumentEvent(count++);
-        //    countMessageTimer.Duration = 1;
-        //    countMessageTimer.Run();
-        //}
-    }
+        if (countMessageTimer.Finished)
+        {
+            InvokeOneArgumentEvent(count++);
+            countMessageTimer.Duration = 1;
+            countMessageTimer.Run();
+        }
+	}
 
     /// <summary>
     /// Adds the given listener to the no argument event
